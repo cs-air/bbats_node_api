@@ -8,7 +8,7 @@ module.exports = function(app) {
     .post(Image.createImage);
 
 
-  app.route('/images/:imageId')
-    .get(Image.getImages)
+  app.route('/images/:filename')
+    .get(Image.getImage)
     
 };

@@ -4,12 +4,9 @@ var Schema = mongoose.Schema;
 
 
 var ImageSchema = new Schema({
-    filename: String,
-    originalName: String,
+    filename: {type: String, default: `${new Date().getMonth() + 1}-${new Date().getDate()}-${new Date().getFullYear()}`},
     classId: String,
-    date: {type: Date,
-         default: Date.now()}
-
+    result: String
 });
 
 module.exports = mongoose.model('Images', ImageSchema);

@@ -24,18 +24,31 @@ exports.getImages = function(req, res, next) {
     });
 };
 
+exports.getImage = function(req, res, next) {
+    // use lean() to get a plain JS object
+    // remove the version key from the response
+    let filename = req.params.filename;
+    console.log(filename);
+    Image.findOne({filename: filename}).lean().exec((err, image) => {
+        if (err) {
+            res.sendStatus(400);
+        }
+ 
+        res.json(image);
+    });
+};
+
 exports.createImage = function(req, res, next) {
     let newImage = new Image();
-    console.log(req);
-    console.log(req.params);
-    console.log(req.image);
-    newImage.filename = req.file.filename;
-    newImage.originalName = req.file.originalName;
+    console.log(req.body);
+    newImage.filename = req.body.data.image;
     newImage.classId = req.body.classId;
+    let result = req.body.data.students;
+    newImage.result = JSON.stringify(result);
 
     newImage.save(function(err, image) {
         if (err) {
-            return res.sendStatus(400);
+            return res.status(400).send({error: err});
         }
         res.status(201).send({ image });
     });
