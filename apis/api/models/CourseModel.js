@@ -13,7 +13,9 @@ var CourseSchema = new Schema({
     room: String,
     building: String,
     startDate: Number,
-    endDate: Number
+    endDate: Number,
+    id: String,
+    students: [{}]
 });
 
 module.exports = mongoose.model('Courses', CourseSchema);

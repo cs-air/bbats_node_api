@@ -7,6 +7,7 @@ mongoose = require('mongoose'),
   Course = require('./api/models/CourseModel'),
   Image = require('./api/models/ImageModel');
 bodyParser = require('body-parser');
+mongo = require('./mongoConfig');
 
 const cors = require('cors');
 
@@ -30,7 +31,7 @@ exports.upload = multer({ storage: storage });
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/AttendanceTrackingDB');
+mongoose.connect('mongodb://localhost/AttendanceTrackingDB', {user: mongo.MONGO_CREDS.username, pass: mongo.MONGO_CREDS.password, authdb: 'admin'});
 var db = mongoose.connection;
 
 // initialize cookie-parser to allow us access the cookies stored in the browser. 

@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 exports.getCourses = function (req, res) {
     console.log('hiii');
     let userId = req.query.userId;
-    console.log(userId);
+    console.log(req.query);
     if (userId) {
         Course.find({ownerId: req.query.userId}, function(err, courses) {
             if (err) {
@@ -62,7 +62,7 @@ exports.getCourse = function (req, res) {
 };
 
 exports.updateCourse = function (req, res) {
-    Course.findOneAndUpdate({ _id: req.params.courseNum }, req.body, { new: true }, function (err, course) {
+    Course.findOneAndUpdate({ id: req.params.id }, req.body, { new: true }, function (err, course) {
         if (err) {
             res.send(err);
         } else {
@@ -73,7 +73,7 @@ exports.updateCourse = function (req, res) {
 
 exports.deleteCourse = function (req, res) {
     Course.remove({
-        _id: req.params.courseNum
+        id: req.params.id
     }, function (err, course) {
         if (err) {
             res.send(err);

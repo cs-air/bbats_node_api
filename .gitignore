@@ -3,3 +3,6 @@ node_modules/
 apis/node_modules/
 apis/package-lock.json
 .DS_Store
+.vscode/
+mongoConfig.js
+server.js
